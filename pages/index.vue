@@ -6,14 +6,23 @@ import type { Product } from "~/types";
 
 const { $client } = useNuxtApp();
 
-const products =
-  (await $client.getProducts.useQuery().catch(console.warn)) ?? [];
+const productsQuery = $client.getProducts.useQuery();
 
 async function handleAddProduct(product: Omit<Product, "id">) {
-  await $client.addProduct.mutate(product);
-
-  products.push(product);
+  try {
+    await $client.addProduct.mutate(product);
+  } catch (error) {
+    console.error(error);
+    return;
+  }
+  productsQuery.refresh().catch(console.error);
 }
+
+const products = computed(() => productsQuery.data.value ?? []);
+
+onMounted(() => {
+  productsQuery.execute().catch(console.error);
+});
 </script>
 
 <template>
