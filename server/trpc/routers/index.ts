@@ -1,28 +1,31 @@
 import { z } from "zod";
 import { publicProcedure, router } from "../trpc";
+import { Product } from "~/types";
+
+let productsDb: Product[] = [
+  {
+    id: 1 as unknown as number,
+    name: "Product 1",
+    price: 10,
+    description: "Description 1",
+  },
+  {
+    id: 2 as unknown as number,
+    name: "Product 2",
+    price: 20,
+    description: "Description 2",
+  },
+  {
+    id: 3 as unknown as number,
+    name: "Product 3",
+    price: 30,
+    description: "Description 3",
+  },
+];
 
 export const appRouter = router({
   getProducts: publicProcedure.query(() => {
-    return [
-      {
-        id: 1 as unknown as number,
-        name: "Product 1",
-        price: 10,
-        description: "Description 1",
-      },
-      {
-        id: 2 as unknown as number,
-        name: "Product 2",
-        price: 20,
-        description: "Description 2",
-      },
-      {
-        id: "3" as unknown as number,
-        name: "Product 3",
-        price: "30",
-        description: "Description 3",
-      },
-    ];
+    return productsDb;
   }),
   addProduct: publicProcedure
     .input(
@@ -30,12 +33,15 @@ export const appRouter = router({
         name: z.string(),
         price: z.number(),
         description: z.string(),
-      }),
+      })
     )
     .mutation(({ input }) => {
-      // Simulated adding a product
-      console.log("Adding product:", input);
-      return { id: Math.floor(Math.random() * 1000), ...input };
+      const newProduct = {
+        id: productsDb.length + 1,
+        ...input,
+      };
+      productsDb.push(newProduct);
+      return newProduct;
     }),
 });
 
