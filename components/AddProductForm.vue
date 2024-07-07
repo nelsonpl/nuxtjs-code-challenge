@@ -22,18 +22,18 @@ function submitForm() {
 
 <template>
   <form @submit.prevent="submitForm">
-    <input v-model="product.name" placeholder="Product Name" required />
+    <input v-model="product.name" :placeholder="$t('product.placeholder.name')" required />
     <input
       v-model.number="product.price"
       type="number"
-      placeholder="Price"
+      :placeholder="$t('product.placeholder.price')"
       required
     />
     <textarea
       v-model="product.description"
-      placeholder="Description"
+      :placeholder="$t('product.placeholder.description')"
       required
     ></textarea>
-    <button type="submit">Add Product</button>
+    <button type="submit">{{ $t('product.btn') }}</button>
   </form>
 </template>

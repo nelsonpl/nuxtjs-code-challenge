@@ -27,8 +27,8 @@ onMounted(() => {
 
 <template>
   <div>
-    <h1>Welcome</h1>
-    <p>Intro</p>
+    <h1>{{ $t('welcome') }}</h1>
+    <p>{{ $t('intro') }}</p>
     <ProductList :products="products" />
     <AddProductForm @add-product="handleAddProduct" />
     <language-switcher />
