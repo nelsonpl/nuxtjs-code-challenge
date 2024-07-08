@@ -15,6 +15,7 @@ Follow these steps to set up and run the application:
 
 2. **Install Dependencies**
    ```bash
+   nvm use
    npm install
    # or
    yarn install
