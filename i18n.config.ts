@@ -6,6 +6,7 @@ export default defineI18nConfig(() => ({
       welcome: "Welcome",
       intro: "List of products",
       product: {
+        title: "Add product",
         placeholder: {
           name: "Product name",
           price: "Product price",
@@ -18,6 +19,7 @@ export default defineI18nConfig(() => ({
       welcome: "Bienvenue",
       intro: "Liste des produits",
       product: {
+        title: "Ajouter un produit",
         placeholder: {
           name: "Nom du produit",
           price: "Prix du produit",
@@ -30,6 +32,7 @@ export default defineI18nConfig(() => ({
       welcome: "Bienvenido",
       intro: "Lista de productos",
       product: {
+        title: "Añadir producto",
         placeholder: {
           name: "Nombre del producto",
           price: "Precio del producto",

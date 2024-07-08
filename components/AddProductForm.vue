@@ -13,7 +13,7 @@ const product = reactive<Omit<Product, "id">>(
       return acc;
     },
     {
-      price: null,
+      price: 0,
       translations: {},
     }
   )
@@ -25,39 +25,42 @@ function submitForm() {
     acc[locale] = { name: "", description: "" };
     return acc;
   }, {});
-  product.price = null;
+  product.price = 0;
 }
 </script>
 
 <template>
-  <form @submit.prevent="submitForm" class="mt-4 space-y-4 bg-gray-400 p-4 rounded">
-    <div v-for="locale in locales" :key="locale">
-      <div class="font-semibold">{{ localesLabels[locale] }}</div>
-      <div :key="locale" class="flex space-x-1">
+  <form @submit.prevent="submitForm" class="mt-8 space-y-6 bg-white p-6 rounded-lg shadow-md">
+    <h2 class="text-2xl font-semibold text-gray-700">{{ $t('product.title') }}</h2>
+    <div v-for="locale in locales" :key="locale" class="space-y-4">
+      <div class="font-semibold text-gray-700">{{ localesLabels[locale] }}</div>
+      <div>
+        <label class="block text-sm font-medium text-gray-600">{{ $t('product.placeholder.name') }}</label>
         <input
           v-model="product.translations[locale].name"
-          :placeholder="$t('product.placeholder.name')"
-          class="w-full p-2 border rounded"
+          class="w-full p-2 border border-gray-300 rounded mt-1 focus:ring focus:ring-blue-200 focus:border-blue-500"
           required
         />
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-600">{{ $t('product.placeholder.description') }}</label>
         <textarea
           v-model="product.translations[locale].description"
-          :placeholder="$t('product.placeholder.description')"
-          class="w-full p-2 border rounded"
+          class="w-full p-2 border border-gray-300 rounded mt-1 focus:ring focus:ring-blue-200 focus:border-blue-500"
           required
         ></textarea>
       </div>
     </div>
     <div>
+      <label class="block text-sm font-medium text-gray-600">{{ $t('product.placeholder.price') }}</label>
       <input
         v-model.number="product.price"
         type="number"
-        :placeholder="$t('product.placeholder.price')"
-        class="w-full p-2 border rounded"
+        class="w-full p-2 border border-gray-300 rounded mt-1 focus:ring focus:ring-blue-200 focus:border-blue-500"
         required
       />
     </div>
-    <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded">
+    <button type="submit" class="w-full py-2 bg-green-600 text-white font-semibold rounded hover:bg-green-700">
       {{ $t("product.btn") }}
     </button>
   </form>

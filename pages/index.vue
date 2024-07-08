@@ -27,11 +27,15 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="container mx-auto p-4">
-    <h1 class="text-2xl font-bold">{{ $t('welcome') }}</h1>
-    <p class="mb-4">{{ $t('intro') }}</p>
-    <LanguageSwitcher />
-    <AddProductForm @add-product="handleAddProduct" />
-    <ProductList :products="products" />
+  <div class="container mx-auto p-6 bg-gray-50 rounded-lg shadow-lg">
+    <header class="mb-6">
+      <h1 class="text-4xl font-bold text-gray-800">{{ $t('welcome') }}</h1>
+      <p class="mt-2 text-lg text-gray-600">{{ $t('intro') }}</p>
+      <LanguageSwitcher />
+    </header>
+    <main>
+      <AddProductForm @add-product="handleAddProduct" />
+      <ProductList :products="products" />
+    </main>
   </div>
 </template>
