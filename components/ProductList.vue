@@ -11,8 +11,8 @@ defineProps<{
     <h2>Product List</h2>
     <ul>
       <li v-for="product in products" :key="product.id">
-        {{ product.name }} - ${{ product.price }}
-        <p>{{ product.description }}</p>
+        {{ product.translations[$i18n.locale].name }} - ${{ product.price }}
+        <p>{{ product.translations[$i18n.locale].description }}</p>
       </li>
     </ul>
   </div>

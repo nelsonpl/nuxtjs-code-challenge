@@ -1,39 +1,55 @@
 <script setup lang="ts">
 import { reactive } from "vue";
-import type { Product } from "~/types";
+import { type Product, locales } from "~/types";
 
 const emit = defineEmits<{
   (e: "add-product", product: Omit<Product, "id">): void;
 }>();
 
-const product = reactive<Omit<Product, "id">>({
-  name: "",
-  price: 0,
-  description: "",
-});
+const product = reactive<Omit<Product, "id">>(
+  locales.reduce(
+    (acc, locale) => {
+      acc.translations[locale] = { name: "", description: "" };
+      return acc;
+    },
+    {
+      price: 0,
+      translations: {},
+    }
+  )
+);
 
 function submitForm() {
   emit("add-product", { ...product });
-  product.name = "";
+  product.translations = locales.reduce((acc, locale) => {
+    acc[locale] = { name: "", description: "" };
+    return acc;
+  }, {});
   product.price = 0;
-  product.description = "";
 }
 </script>
 
 <template>
   <form @submit.prevent="submitForm">
-    <input v-model="product.name" :placeholder="$t('product.placeholder.name')" required />
-    <input
-      v-model.number="product.price"
-      type="number"
-      :placeholder="$t('product.placeholder.price')"
-      required
-    />
-    <textarea
-      v-model="product.description"
-      :placeholder="$t('product.placeholder.description')"
-      required
-    ></textarea>
-    <button type="submit">{{ $t('product.btn') }}</button>
+    <div v-for="locale in locales" :key="locale">
+      <div>{{ locale }}</div>
+      <input
+        v-model="product.translations[locale].name"
+        :placeholder="$t('product.placeholder.name')"
+        required
+      />
+      <textarea
+        v-model="product.translations[locale].description"
+        :placeholder="$t('product.placeholder.description')"
+        required
+      ></textarea>
+    </div>
+      <input
+        v-model.number="product.price"
+        type="number"
+        :placeholder="$t('product.placeholder.price')"
+        required
+      />
+    <button type="submit">{{ $t("product.btn") }}</button>
   </form>
 </template>
