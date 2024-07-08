@@ -17,15 +17,11 @@ Follow these steps to set up and run the application:
    ```bash
    nvm use
    npm install
-   # or
-   yarn install
    ```
 
 3. **Run the Application**
    ```bash
    npm run dev
-   # or
-   yarn dev
    ```
 
 ## Key Features
