@@ -9,11 +9,31 @@ defineProps<{
 <template>
   <div class="mt-4">
     <h2 class="text-xl font-semibold mb-2">Product List</h2>
-    <ul class="space-y-2">
-      <li v-for="product in products" :key="product.id" class="border-b pb-2">
-        <div class="font-medium">{{ product.translations[$i18n.locale].name }} - ${{ product.price }}</div>
-        <p>{{ product.translations[$i18n.locale].description }}</p>
-      </li>
-    </ul>
+    <table class="min-w-full bg-white">
+      <thead>
+        <tr>
+          <th class="py-2 px-4 border-b">#</th>
+          <th class="py-2 px-4 border-b">Name</th>
+          <th class="py-2 px-4 border-b">Description</th>
+          <th class="py-2 px-4 border-b">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="product in products" :key="product.id" class="border-b">
+          <td class="py-2 px-4">
+            {{ product.id }}
+          </td>
+          <td class="py-2 px-4">
+            {{ product.translations[$i18n.locale].name }}
+          </td>
+          <td class="py-2 px-4">
+            {{ product.translations[$i18n.locale].description }}
+          </td>
+          <td class="py-2 px-4">
+            ${{ product.price }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
