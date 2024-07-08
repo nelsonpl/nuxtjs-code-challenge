@@ -3,6 +3,7 @@ import AddProductForm from "~/components/AddProductForm.vue";
 import ProductList from "~/components/ProductList.vue";
 import LanguageSwitcher from "~/components/LanguageSwitcher.vue";
 import type { Product } from "~/types";
+import { computed, onMounted } from "vue";
 
 const { $client } = useNuxtApp();
 
@@ -26,11 +27,11 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
-    <h1>{{ $t('welcome') }}</h1>
-    <p>{{ $t('intro') }}</p>
-    <ProductList :products="products" />
+  <div class="container mx-auto p-4">
+    <h1 class="text-2xl font-bold">{{ $t('welcome') }}</h1>
+    <p class="mb-4">{{ $t('intro') }}</p>
+    <LanguageSwitcher />
     <AddProductForm @add-product="handleAddProduct" />
-    <language-switcher />
+    <ProductList :products="products" />
   </div>
 </template>
